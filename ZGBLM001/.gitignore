@@ -1,0 +1,10 @@
+/node_modules/
+package-lock.json
+/dist/
+/.vscode/
+/*-content.zip/ 
+
+# auto generated wildcard
+ZGBLD001/.env3
+# auto generated wildcard
+ZGBLD001/.env4

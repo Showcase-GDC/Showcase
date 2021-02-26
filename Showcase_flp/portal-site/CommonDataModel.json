@@ -1,0 +1,94 @@
+{
+	"_version": "3.0.0",
+	"identification": {
+		"id": "a8c6d12d-66b4-446f-8d93-70e04dc6d98b",
+		"entityType": "bundle"
+	},
+	"payload": {
+		"catalogs": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "defaultCatalogId",
+				"title": "{{title}}",
+				"entityType": "catalog",
+				"i18n": "i18n/defaultCatalogId.properties"
+			},
+			"payload": {
+				"viz": []
+			}
+		}],
+		"groups": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "defaultGroupId",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/defaultGroupId.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "sap.showcase.ZGBLD001-0-1611209862558",
+					"appId": "sap.showcase.ZGBLD001",
+					"vizId": "New-Create"
+				}, {
+					"id": "showcase.ZGBLD002-1-1611209862558",
+					"appId": "showcase.ZGBLD002",
+					"vizId": "Order-Display"
+				}, {
+					"id": "showcase.ZGBLL001-2-1611209862558",
+					"appId": "showcase.ZGBLL001",
+					"vizId": "List-Display"
+				}, {
+					"id": "showcase.ZGBLL002-3-1611209862558",
+					"appId": "showcase.ZGBLL002",
+					"vizId": "ProductUpload-Upload"
+				}, {
+					"id": "showcase.ZGBLM001-4-1611209862558",
+					"appId": "showcase.ZGBLM001",
+					"vizId": "MasterDetail-Display"
+				}, {
+					"id": "showcase.zgblo001-5-1611209862558",
+					"appId": "showcase.zgblo001",
+					"vizId": "Overview-Display"
+				}, {
+					"id": "showcase.zgbll003-6-1614239864636",
+					"appId": "showcase.zgbll003",
+					"vizId": "ListObject-Display"
+				}]
+			}
+		}],
+		"sites": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "3459405f-a395-49ea-95c3-e0e1796e1d4a",
+				"entityType": "site",
+				"title": "SAP Fiori launchpad site on Cloud Foundry",
+				"description": "SAP Fiori launchpad site on Cloud Foundry, deployed from WING"
+			},
+			"payload": {
+				"config": {
+					"ushellConfig": {
+						"renderers": {
+							"fiori2": {
+								"componentData": {
+									"config": {
+										"applications": {
+											"Shell-home": {}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"groupsOrder": ["defaultGroupId"],
+				"sap.cloud.portal": {
+					"config": {
+						"theme.id": "sap_fiori_3",
+						"theme.active": ["sap_fiori_3", "sap_fiori_3_dark", "sap_belize_hcb", "sap_belize_hcw"]
+					}
+				}
+			}
+		}]
+	}
+}

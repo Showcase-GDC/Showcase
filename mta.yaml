@@ -1,0 +1,179 @@
+_schema-version: "3.2"
+ID: Showcase
+version: 0.0.1
+modules:
+  - name: showcase-approuter
+    type: approuter.nodejs
+    path: showcase-approuter
+    requires:
+      - name: Showcase_html_repo_runtime
+      - name: Showcase_uaa
+      - name: Showcase-connectivity
+      - name: portal_resources_Showcase
+      - name: Showcase-destination
+        group: destinations
+        properties:
+          forwardAuthToken: false
+          name: ui5
+          url: https://ui5.sap.com
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+  - name: Showcase_ui_deployer
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: Showcase_html_repo_host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - ZGBLD001-content.zip
+          name: ZGBLD001
+          target-path: resources/
+        - artifacts:
+            - ZGBLD002-content.zip
+          name: ZGBLD002
+          target-path: resources/
+        - artifacts:
+            - ZGBLL001-content.zip
+          name: ZGBLL001
+          target-path: resources/
+        - artifacts:
+            - ZGBLL002-content.zip
+          name: ZGBLL002
+          target-path: resources/
+        - artifacts:
+            - ZGBLM001-content.zip
+          name: ZGBLM001
+          target-path: resources/
+        - artifacts:
+            - zgblo001.zip
+          name: zgblo001
+          target-path: resources/
+        - artifacts:
+            - showcasezgbll003.zip
+          name: showcasezgbll003
+          target-path: resources/
+  - name: ZGBLD001
+    type: html5
+    path: ZGBLD001
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build
+      supported-platforms: []
+  - name: ZGBLD002
+    type: html5
+    path: ZGBLD002
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build
+      supported-platforms: []
+  - name: ZGBLL001
+    type: html5
+    path: ZGBLL001
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build
+      supported-platforms: []
+  - name: ZGBLL002
+    type: html5
+    path: ZGBLL002
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build
+      supported-platforms: []
+  - name: ZGBLM001
+    type: html5
+    path: ZGBLM001
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build
+      supported-platforms: []
+  - name: zgblo001
+    type: html5
+    path: zgblo001
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+  - name: showcasezgbll003
+    type: html5
+    path: zgbll003
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []    
+  - name: Showcase_flp
+    type: com.sap.application.content
+    path: Showcase_flp
+    requires:
+      - name: portal_resources_Showcase
+        parameters:
+          content-target: true
+          service-key:
+            config:
+              content-endpoint: developer
+            name: content-deploy-key
+      - name: Showcase_html_repo_host
+      - name: Showcase_ui_deployer
+      - name: Showcase_uaa
+
+resources:
+  - name: Showcase_html_repo_runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+  - name: Showcase_html_repo_host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+  - name: Showcase_uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-name: Showcase-xsuaa-service
+      service-plan: application
+  - name: Showcase-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+  - name: portal_resources_Showcase
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: portal
+      service-plan: standard
+  - name: Showcase-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install
+parameters:
+  deploy_mode: html5-repo

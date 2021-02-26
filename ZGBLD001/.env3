@@ -1,0 +1,2 @@
+VCAP_SERVICES={}
+destinations=[{"name":"S4J","url":"http://S4J.dest","proxyHost":"http://127.0.0.1","proxyPort":"8887"}]
